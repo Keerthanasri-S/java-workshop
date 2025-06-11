@@ -3,6 +3,7 @@ package com.temperaturedata.beans;
 import jdk.javadoc.doclet.Taglet;
 
 public class Location {
+    private Building[] buildings;
     private String doorno;
     private int street;
     private int areaname;
@@ -13,7 +14,6 @@ public class Location {
     private String pincode;
     private double latitude;
     private double longtitude;
-    private int noofbuildings;
 
 
 }
