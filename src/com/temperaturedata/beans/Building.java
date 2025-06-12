@@ -1,6 +1,6 @@
 package com.temperaturedata.beans;
 
-public class Building {
+public abstract class Building {
     private Floor[] floors;
     private String color;
     private String shape;
@@ -10,5 +10,6 @@ public class Building {
     private double height;
     private double squareFeet;
     private boolean parkingAvailable;
+    abstract void ebbill();
 
 }
