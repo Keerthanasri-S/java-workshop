@@ -2,7 +2,7 @@ package com.temperaturedata.beans;
 
 import java.util.Calendar;
 
-public class Commerical extends Building{
+public final class Commerical extends Building{
     private Calendar openHour;
     private Calendar closeHour;
     public void setOpenHour(Calendar openHour){
@@ -23,5 +23,16 @@ public class Commerical extends Building{
     @Override
     void ebbill() {
 
+    }
+    public class Parking {
+        public void print(){
+            System.out.println("park the car");
+        }
+    }
+
+    public static void main(String[] args) {
+        Commerical commerical=new Commerical();
+        Commerical.Parking parkings=commerical.new Parking();
+        parkings.print();
     }
 }
