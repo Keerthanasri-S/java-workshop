@@ -1,6 +1,6 @@
 package com.temperaturedata.beans;//class opjp
 
-public class HumiditySensor implements Sensor {
+public class HumiditySensor  {
     private float temp;
     public HumiditySensor(float t){
         temp=t;
@@ -15,5 +15,6 @@ public class HumiditySensor implements Sensor {
         if(ReadingUnit.Kg.equals(unit)){
             return temp;
         }
+        return 0;
     }
 }
