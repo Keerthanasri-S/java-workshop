@@ -2,14 +2,14 @@ package com.myjava.String;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class RepeatedCharacter {
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
         String word=sc.nextLine();
-
-        HashMap<Character, Integer> map = new HashMap<>();
+        Map<Character, Integer> map = new HashMap<>();
         for(char words:word.toCharArray()){
             map.put(words,map.getOrDefault(words,0)+1);
     }
