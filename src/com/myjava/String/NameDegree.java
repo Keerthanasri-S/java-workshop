@@ -9,10 +9,11 @@ public class NameDegree {
         String degree= sc.nextLine();
         String college= sc.nextLine();
         StringBuilder namewithdegree = new StringBuilder();
-        namewithdegree.append(name);
-        namewithdegree.append(degree);
-        namewithdegree.append(college);
-        System.out.println("I'm " + name + " I have completed my " + degree+ " in college of "+college);
+        namewithdegree.append(name).append(" I have completed my ");
+        namewithdegree.append(degree).append(" in college of ");
+        namewithdegree.append( college);
 
+      //  System.out.println("I'm " + name + " I have completed my " + degree+ " in college of "+college);
+        System.out.println(namewithdegree);
     }
 }
