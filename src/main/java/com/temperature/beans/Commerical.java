@@ -1,4 +1,4 @@
-package com.temperaturedata.beans;
+package com.temperature.beans;
 
 import java.util.Calendar;
 

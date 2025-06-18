@@ -1,6 +1,4 @@
-package com.temperaturedata.beans;
-
-import java.util.Calendar;
+package com.temperature.beans;
 
 public final class Residential extends Building{
     private String type;

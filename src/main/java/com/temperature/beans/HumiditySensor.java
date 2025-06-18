@@ -1,4 +1,4 @@
-package com.temperaturedata.beans;//class opjp
+package com.temperature.beans;//class opjp
 
 public class HumiditySensor  {
     private float temp;

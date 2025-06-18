@@ -15,6 +15,7 @@ public class WordcountTest {
         Assertion.assertEquals(4,count);
     }
     @Test
+
     public void testWordcountwithoutspace(){
         Wordcount wordcount = new Wordcount();
         int count = wordcount.count("Stringisimmutableobject");

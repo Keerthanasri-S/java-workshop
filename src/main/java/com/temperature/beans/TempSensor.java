@@ -1,4 +1,4 @@
-package com.temperaturedata.beans;
+package com.temperature.beans;
 
 public class TempSensor {
     private float temp;
