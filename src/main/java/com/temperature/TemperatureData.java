@@ -1,12 +1,11 @@
 package com.temperature;
 
-import com.temperature.beans.Building;
-import com.temperature.beans.Location;
-import com.temperature.beans.Organization;
+import com.temperature.beans.*;
 
 import javax.swing.*;
 import java.io.*;
 import java.time.LocalDate;
+import java.util.Locale;
 
 public class TemperatureData {
 
@@ -30,8 +29,16 @@ public class TemperatureData {
 //        System.out.println(tempSensor.toString());
 //        System.out.println(obj.equals(tempSensor));
     public static void main(String[] args) {
+        try{
+            Commerical  commerical = new Commerical();
+            commerical.setNooffloors(200);
+        } catch (BuildingException e) {
+            throw new RuntimeException(e);
+        }
+        }
 
 
+    private static void extracted() {
         Organization ourTechnology = new Organization();
         ourTechnology.setName("ourTechnology");
         ourTechnology.setdateofinitaial(LocalDate.of(2021, 04, 14));
@@ -80,16 +87,5 @@ public class TemperatureData {
                 throw new RuntimeException(e);
             }
         }
-
-//        public void writeLocations (String filename, Location location) throws IOException
-//        {
-//
-//            FileOutputStream fileoutputStream = new FileOutputStream(filename);
-//            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileoutputStream);
-//            objectOutputStream.writeObject(location);
-//            objectOutputStream.close();
-//            fileoutputStream.close();
-//        }
-
     }
 }

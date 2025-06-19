@@ -2,10 +2,13 @@ package com.temperature.beans;
 
 public class TempSensor {
     private float temp;
+    public TempSensor(float atemp ) throws TemperatureException {
+        if(atemp < -89 || atemp >58){
+            throw new TemperatureException("Temperature out of range");
+        }
+        temp = atemp;
+    }
 
-    public TempSensor(float t){
-        temp=t;
-     }
     public float getReading(){
         return temp;
     }

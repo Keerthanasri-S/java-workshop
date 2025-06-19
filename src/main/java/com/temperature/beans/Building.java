@@ -1,13 +1,28 @@
 package com.temperature.beans;
 
+import java.util.List;
+
 public abstract sealed class Building permits Residential,Commerical {
-//    private Floor[] floors;
     private String color;
     private String shape;
     private String name;
     private int bulidingNumber;
     private double height;
     private double squareFeet;
+    private List<Floor> floors;
+
+    public int getNooffloors() {
+        return nooffloors;
+    }
+
+    public void setNooffloors(int nooffloors)throws BuildingException{
+       if(nooffloors>100){
+           throw new BuildingException("number of floors are greater than 100");
+       }
+        this.nooffloors = nooffloors;
+    }
+
+    private int nooffloors;
     private boolean parkingAvailable;
     abstract void ebbill();
 
@@ -41,6 +56,8 @@ public abstract sealed class Building permits Residential,Commerical {
 
     public void setBulidingNumber(int bulidingNumber) {
         this.bulidingNumber = bulidingNumber;
+
+
     }
 
     public double getHeight() {

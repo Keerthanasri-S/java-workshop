@@ -2,10 +2,11 @@ package com.temperature.beans;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Organization implements Serializable {
     //creating a location array
-    private Location[] locations;
+    private List<Location> locations;
     private String name;
     private String certificateid;
     private String type;

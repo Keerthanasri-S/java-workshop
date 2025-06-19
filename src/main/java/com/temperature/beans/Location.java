@@ -1,9 +1,10 @@
 package com.temperature.beans;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Location implements Serializable {
-//    private Building[] buildings;
+
     private String doorno;
     private int street;
     private int areaname;
@@ -14,6 +15,7 @@ public class Location implements Serializable {
     private String pincode;
     private double latitude;
     private double longtitude;
+    private List<Building> building;
 
 
 

@@ -5,6 +5,10 @@ import java.util.Calendar;
 public final class Commerical extends Building{
     private Calendar openHour;
     private Calendar closeHour;
+
+
+
+    private int numberofbuilding;
     public void setOpenHour(Calendar openHour){
         this.openHour=openHour;
 
@@ -29,6 +33,7 @@ public final class Commerical extends Building{
             System.out.println("park the car");
         }
     }
+
 
     public static void main(String[] args) {
         Commerical commerical=new Commerical();
