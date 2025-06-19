@@ -2,6 +2,7 @@ package com.temperature.beans;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 public class Location implements Serializable {
 
@@ -16,15 +17,16 @@ public class Location implements Serializable {
     private double latitude;
     private double longtitude;
 
-    public List<Building> getBuilding() {
+
+    public Set<Building> getBuilding() {
         return building;
     }
 
-    public void setBuilding(List<Building> building) {
+    public void setBuilding(Set<Building> building) {
         this.building = building;
     }
 
-    private List<Building> building;
+    private Set<Building> building;
 
 
 

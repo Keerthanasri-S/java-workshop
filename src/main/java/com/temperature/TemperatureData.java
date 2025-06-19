@@ -1,11 +1,10 @@
 package com.temperature;
 
+import com.sun.source.tree.Tree;
 import com.temperature.beans.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class TemperatureData {
 
@@ -56,7 +55,7 @@ public class TemperatureData {
         Commerical Navigator=createBuilding(2,true,"white","shape","navigtor",1,20.10,10.20);
         Commerical creator=createBuilding(2,true,"white","shape","creator",2,20.10,10.20);
 
-        List<Building> buildings = new ArrayList<>();
+        Set<Building> buildings = new HashSet<>();
         buildings.add(Navigator);
         buildings.add(creator);
         chennai.setBuilding(buildings);
@@ -64,7 +63,7 @@ public class TemperatureData {
         Commerical Inventor=createBuilding(2,true,"white","shape","inventer",1,20.10,10.20);
         Commerical Innovator=createBuilding(2,true,"white","shape","innovator",2,20.10,10.20);
 
-        List<Building>buildings1 = new ArrayList<>();
+        Set<Building>buildings1 = new HashSet<>();
         buildings1.add(Inventor);
         buildings1.add(Innovator);
         coimbatore.setBuilding(buildings1);
@@ -72,14 +71,27 @@ public class TemperatureData {
 
         Floor firstfloor= createfloor( 1,"floor1");
         Floor secondfloor= createfloor( 2,"floor2");
-
-        Set<Floor> floors = Set.of(firstfloor,secondfloor);
-        Navigator.setFloors(floors);
+        TreeSet<Floor> floorsForNavigator =new TreeSet<>(Comparator.comparingInt(Floor::getFloorNumber));
+        floorsForNavigator.add(firstfloor);
+        floorsForNavigator.add(secondfloor);
+        Navigator.setFloors(floorsForNavigator);
 
         Floor firstFloorForCreator= createfloor( 1,"floor1");
         Floor secondFloorForCreator= createfloor( 2,"floor2");
+        TreeSet<Floor> floorsForCreator =new TreeSet<>(Comparator.comparingInt(Floor::getFloorNumber));
+        floorsForCreator.add(firstFloorForCreator);
+        floorsForCreator.add(secondFloorForCreator);
+        creator.setFloors(floorsForCreator);
 
-        creator.setFloors( Set.of(firstFloorForCreator,secondFloorForCreator));
+        zone zoneForFirstFloor = createZone(1,"zone1",2,"zonetype1");
+        zone zone2ForFirstFloor = createZone(2,"zone2",3,"zonetype2");
+        Set<zone> zones = Set.of(zoneForFirstFloor,zone2ForFirstFloor);
+        firstfloor.setZones(zones);
+
+        zone zoneForSecondFloor = createZone(1,"zone1",2,"zonetype1");
+        zone zone2ForSecondFloor=createZone(2,"zone2",3,"zonetype2");
+        Set<zone> zonesForSecondFloor = Set.of(zoneForSecondFloor,zone2ForSecondFloor);
+        firstfloor.setZones(zonesForSecondFloor);
     }
     public static Location createLocation(String doorno, int street, String areaname, String city, String district, String country, String state, double longtitude, double latitude, String pincode){
         Location ourlocation = new Location();
@@ -113,6 +125,15 @@ public class TemperatureData {
         ourfloor.setFloorNumber(floorNumber);
         ourfloor.setFloorName(floorName);
         return ourfloor;
+ }
+
+ public  static zone createZone(  int zoneNumber, String zoneName, int noOfRooms,String zoneType){
+        zone ourzone = new zone();
+        ourzone.setZoneName(zoneName);
+        ourzone.setZoneNumber(zoneNumber);
+        ourzone.setNoOfRooms(noOfRooms);
+        ourzone.setZoneType(zoneType);
+        return ourzone;
  }
     }
 

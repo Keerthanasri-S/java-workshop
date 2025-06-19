@@ -1,6 +1,7 @@
 package com.temperature.beans;
 
 import java.util.List;
+import java.util.Set;
 
 public class Floor {
 
@@ -23,14 +24,14 @@ public class Floor {
         this.floorName = floorName;
     }
 
-    public List<zone> getZones() {
+    public Set<zone> getZones() {
         return zones;
     }
 
-    public void setZones(List<zone> zones) {
+    public void setZones(Set<zone> zones) {
         this.zones = zones;
     }
 
-    private List<zone> zones;
+    private Set<zone> zones;
 
 }

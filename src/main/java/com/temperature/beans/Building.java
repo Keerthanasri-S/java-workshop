@@ -2,6 +2,7 @@ package com.temperature.beans;
 
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 public abstract sealed class Building permits Residential,Commerical {
     private String color;
@@ -14,7 +15,7 @@ public abstract sealed class Building permits Residential,Commerical {
     private boolean parkingAvailable;
 
 
-    private Set<Floor> floors;
+    private TreeSet<Floor> floors;
 
     public int getNooffloors() {
         return nooffloors;
@@ -29,11 +30,11 @@ public abstract sealed class Building permits Residential,Commerical {
 
 
 
-    public Set<Floor> getFloors() {
+    public TreeSet<Floor> getFloors() {
         return floors;
     }
 
-    public void setFloors(Set<Floor> floors) {
+    public void setFloors(TreeSet<Floor> floors) {
         this.floors = floors;
     }
 
