@@ -1,6 +1,7 @@
 package com.temperature.beans;
 
 import java.util.List;
+import java.util.Set;
 
 public abstract sealed class Building permits Residential,Commerical {
     private String color;
@@ -9,7 +10,11 @@ public abstract sealed class Building permits Residential,Commerical {
     private int bulidingNumber;
     private double height;
     private double squareFeet;
-    private List<Floor> floors;
+    private int nooffloors;
+    private boolean parkingAvailable;
+
+
+    private Set<Floor> floors;
 
     public int getNooffloors() {
         return nooffloors;
@@ -22,8 +27,16 @@ public abstract sealed class Building permits Residential,Commerical {
         this.nooffloors = nooffloors;
     }
 
-    private int nooffloors;
-    private boolean parkingAvailable;
+
+
+    public Set<Floor> getFloors() {
+        return floors;
+    }
+
+    public void setFloors(Set<Floor> floors) {
+        this.floors = floors;
+    }
+
     abstract void ebbill();
 
     public String getColor() {
@@ -76,8 +89,8 @@ public abstract sealed class Building permits Residential,Commerical {
         this.squareFeet = squareFeet;
     }
 
-    public boolean isParkingAvailable() {
-        return parkingAvailable;
+    public boolean isParkingAvailable(boolean parkingAvailable) {
+        return this.parkingAvailable;
     }
 
     public void setParkingAvailable(boolean parkingAvailable) {

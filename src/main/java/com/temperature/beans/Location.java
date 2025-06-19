@@ -7,7 +7,7 @@ public class Location implements Serializable {
 
     private String doorno;
     private int street;
-    private int areaname;
+    private String areaname;
     private  String city;
     private  String district;
     private  String state;
@@ -15,6 +15,15 @@ public class Location implements Serializable {
     private String pincode;
     private double latitude;
     private double longtitude;
+
+    public List<Building> getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(List<Building> building) {
+        this.building = building;
+    }
+
     private List<Building> building;
 
 
@@ -35,11 +44,11 @@ public class Location implements Serializable {
         this.street = street;
     }
 
-    public int getAreaname() {
+    public String getAreaname() {
         return areaname;
     }
 
-    public void setAreaname(int areaname) {
+    public void setAreaname(String areaname) {
         this.areaname = areaname;
     }
 

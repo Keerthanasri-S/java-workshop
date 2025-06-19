@@ -2,10 +2,10 @@ package com.temperature;
 
 import com.temperature.beans.*;
 
-import javax.swing.*;
-import java.io.*;
 import java.time.LocalDate;
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class TemperatureData {
 
@@ -28,17 +28,15 @@ public class TemperatureData {
 //        System.out.println(tempSensor.hashcode());
 //        System.out.println(tempSensor.toString());
 //        System.out.println(obj.equals(tempSensor));
-    public static void main(String[] args) {
-        try{
-            Commerical  commerical = new Commerical();
-            commerical.setNooffloors(200);
-        } catch (BuildingException e) {
-            throw new RuntimeException(e);
-        }
-        }
 
-
-    private static void extracted() {
+//        try{
+//            Commerical  commerical = new Commerical();
+//            commerical.setNooffloors(200);
+//        } catch (BuildingException e) {
+//            throw new RuntimeException(e);
+//        }
+//        }
+    public static void main(String[] args) throws BuildingException {
         Organization ourTechnology = new Organization();
         ourTechnology.setName("ourTechnology");
         ourTechnology.setdateofinitaial(LocalDate.of(2021, 04, 14));
@@ -46,46 +44,142 @@ public class TemperatureData {
         ourTechnology.setCeo("mdkfmdsk");
         ourTechnology.setPhone(("+91 8778947245"));
 
-        FileOutputStream outputStream = null;
-        ObjectOutputStream objectOutputStream = null;
-        FileInputStream fileInputStream = null;
-        ObjectInputStream objectInputStream = null;
+        Location chennai = createLocation("4/2",2,"Thambaram","Chennai","Chennai","India","Tamilnadu",9024.32,7902.45,"623503");
+        Location coimbatore = createLocation("001",3,"SARAVANAMPATI","COIMBATORE","Coimbatore","India", "tamilnadu",3849.98,8902.78,"623504");
 
-        try {
-             outputStream = new FileOutputStream("ourTechnology.txt");
-             objectOutputStream = new ObjectOutputStream(outputStream);
-            objectOutputStream.writeObject(ourTechnology);
-            objectOutputStream.close();
-            outputStream.close();
-             fileInputStream = new FileInputStream("OurTechnology.txt");
-             objectInputStream = new ObjectInputStream(fileInputStream);
-            Organization myOrg = (Organization) objectInputStream.readObject();
-            System.out.println(myOrg);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
+        List<Location> location=new ArrayList<>();
+        location.add(chennai);
+        location.add(coimbatore);
+        Organization organization1 = new Organization();
+        organization1.setLocations(location);
 
+        Commerical Navigator=createBuilding(2,true,"white","shape","navigtor",1,20.10,10.20);
+        Commerical creator=createBuilding(2,true,"white","shape","creator",2,20.10,10.20);
 
-                if (outputStream != null) {
-                    outputStream.close();
-                }
-                if (objectOutputStream != null) {
-                    objectOutputStream.close();
-                }
-                if (fileInputStream != null) {
-                    fileInputStream.close();
-                }
-                if (objectInputStream != null) {
-                    objectInputStream.close();
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        List<Building> buildings = new ArrayList<>();
+        buildings.add(Navigator);
+        buildings.add(creator);
+        chennai.setBuilding(buildings);
+        System.out.println(chennai);
+        Commerical Inventor=createBuilding(2,true,"white","shape","inventer",1,20.10,10.20);
+        Commerical Innovator=createBuilding(2,true,"white","shape","innovator",2,20.10,10.20);
+
+        List<Building>buildings1 = new ArrayList<>();
+        buildings1.add(Inventor);
+        buildings1.add(Innovator);
+        coimbatore.setBuilding(buildings1);
+        System.out.println(coimbatore);
+
+        Floor firstfloor= createfloor( 1,"floor1");
+        Floor secondfloor= createfloor( 2,"floor2");
+
+        Set<Floor> floors = Set.of(firstfloor,secondfloor);
+        Navigator.setFloors(floors);
+
+        Floor firstFloorForCreator= createfloor( 1,"floor1");
+        Floor secondFloorForCreator= createfloor( 2,"floor2");
+
+        creator.setFloors( Set.of(firstFloorForCreator,secondFloorForCreator));
     }
-}
+    public static Location createLocation(String doorno, int street, String areaname, String city, String district, String country, String state, double longtitude, double latitude, String pincode){
+        Location ourlocation = new Location();
+        ourlocation.setDoorno(doorno);
+        ourlocation.setStreet(street);
+        ourlocation.setAreaname(areaname);
+        ourlocation.setCity(city);
+        ourlocation.setDistrict(district);
+        ourlocation.setCountry(country);
+        ourlocation.setState(state);
+        ourlocation.setLongtitude(longtitude);
+        ourlocation.setLatitude(latitude);
+        ourlocation.setPincode(pincode);
+        return ourlocation;
+    }
+    public static Commerical createBuilding(int nooffloors, boolean parkingAvailable , String color, String shape , String name , int bulidingNumber , double height,
+                                            double squareFeet ) throws BuildingException {
+        Commerical ourbuilding = new Commerical();
+        ourbuilding.setNooffloors(nooffloors);
+        ourbuilding.isParkingAvailable(parkingAvailable);
+        ourbuilding.setColor(color);
+        ourbuilding.setShape(shape);
+        ourbuilding.setName(name);
+        ourbuilding.setBulidingNumber(bulidingNumber);
+        ourbuilding.setHeight(height);
+        ourbuilding.setSquareFeet(squareFeet);
+        return  ourbuilding;
+    }
+ public  static Floor createfloor( int floorNumber, String floorName){
+        Floor ourfloor = new Floor();
+        ourfloor.setFloorNumber(floorNumber);
+        ourfloor.setFloorName(floorName);
+        return ourfloor;
+ }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        FileOutputStream outputStream = null;
+//        ObjectOutputStream objectOutputStream = null;
+//        FileInputStream fileInputStream = null;
+//        ObjectInputStream objectInputStream = null;
+//
+//        try {
+//             outputStream = new FileOutputStream("ourTechnology.txt");
+//             objectOutputStream = new ObjectOutputStream(outputStream);
+//            objectOutputStream.writeObject(ourTechnology);
+//            objectOutputStream.close();
+//            outputStream.close();
+//             fileInputStream = new FileInputStream("OurTechnology.txt");
+//             objectInputStream = new ObjectInputStream(fileInputStream);
+//            Organization myOrg = (Organization) objectInputStream.readObject();
+//            System.out.println(myOrg);
+//        } catch (FileNotFoundException e) {
+//            throw new RuntimeException(e);
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        } finally {
+//            try {
+//
+//
+//                if (outputStream != null) {
+//                    outputStream.close();
+//                }
+//                if (objectOutputStream != null) {
+//                    objectOutputStream.close();
+//                }
+//                if (fileInputStream != null) {
+//                    fileInputStream.close();
+//                }
+//                if (objectInputStream != null) {
+//                    objectInputStream.close();
+//                }
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
+//    }

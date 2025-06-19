@@ -5,6 +5,15 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Organization implements Serializable {
+
+    public List<Location> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
+    }
+
     //creating a location array
     private List<Location> locations;
     private String name;
@@ -15,13 +24,7 @@ public class Organization implements Serializable {
     private String phone;
     private String ceo;
 
-    public Location[] getLocations() {
-        return locations;
-    }
 
-    public void setLocations(Location[] locations) {
-        this.locations = locations;
-    }
 
     public String getName() {
         return name;
