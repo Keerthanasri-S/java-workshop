@@ -1,13 +1,28 @@
 package com.temperature.beans;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+
 public class TempSensor {
     private float temp;
-    public TempSensor(float atemp ) throws TemperatureException {
-        if(atemp < -89 || atemp >58){
-            throw new TemperatureException("Temperature out of range");
-        }
-        temp = atemp;
+    private Map<LocalDateTime,Tempdata> temperatureDAtaMAp;
+
+    public Map<LocalDateTime, Tempdata> getTemperatureDAtaMAp() {
+        return temperatureDAtaMAp;
     }
+
+    public void setTemperatureDAtaMAp(Map<LocalDateTime, Tempdata> temperatureDAtaMAp) {
+        this.temperatureDAtaMAp = temperatureDAtaMAp;
+    }
+//    public TempSensor(float atemp ) throws TemperatureException {
+//        if(atemp < -89 || atemp >58){
+//            throw new TemperatureException("Temperature out of range");
+//        }
+//        temp = atemp;
+//    }
 
     public float getReading(){
         return temp;

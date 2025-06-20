@@ -4,10 +4,16 @@ import java.util.List;
 import java.util.Set;
 
 public class Floor {
-
+    private Set<zone> zones;
     private int floorNumber;
     private String floorName;
+    public Set<zone> getZones() {
+        return zones;
+    }
 
+    public void setZones(Set<zone> zones) {
+        this.zones = zones;
+    }
     public int getFloorNumber() {
         return floorNumber;
     }
@@ -24,14 +30,9 @@ public class Floor {
         this.floorName = floorName;
     }
 
-    public Set<zone> getZones() {
-        return zones;
-    }
 
-    public void setZones(Set<zone> zones) {
-        this.zones = zones;
-    }
 
-    private Set<zone> zones;
+
+
 
 }

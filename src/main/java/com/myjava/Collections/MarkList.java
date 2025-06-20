@@ -12,12 +12,11 @@ public class MarkList {
         marks.add(60);
         marks.add(90);
         int max= marks.get(0);
-        for(int i =0;i<marks.size();i++){
-            if(marks.get(i) > max){
-                max=marks.get(i);
-
+        for(int mark:marks){
+            if(mark > max){
+                max=mark;
             }
-            }
+        }
         System.out.println(max);
         }
     }
