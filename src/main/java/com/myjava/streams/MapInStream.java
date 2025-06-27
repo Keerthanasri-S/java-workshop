@@ -1,8 +1,6 @@
 package com.myjava.streams;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class MapInStream {
