@@ -1,0 +1,1 @@
+This is the empty file and we are creating a new fileThis is new line to append
