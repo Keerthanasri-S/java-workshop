@@ -19,7 +19,7 @@ public class LocationDaoTest {
     static void setup() throws Exception {
         JdbcDataSource ds = new JdbcDataSource();
         ds.setURL("jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1");
-        ds.setUser("satha");
+        ds.setUser("keerthana");
 
         try (Connection connection = ds.getConnection();
              Statement stmt = connection.createStatement()) {
@@ -47,7 +47,7 @@ public class LocationDaoTest {
     @Test
 
     void testSave() {
-        LocationRep loc = locationDao.save(new LocationRep(null, "12A", 5, "Indira Nagar", "Chennai", "Chennai", "Tamil Nadu", "India", "600020", 13.0827, 80.2707));
+        LocationRep loc = locationDao.save(new LocationRep(null, "22A", 25, "Indira Nagar", "Chennai", "Chennai", "Tamil Nadu", "India", "600020", 12.0237, 20.9749));
         assertNotNull(loc.id());
         assertEquals("Chennai", loc.city());
     }
@@ -55,7 +55,7 @@ public class LocationDaoTest {
     @Test
 
     void testFindById() {
-        LocationRep loc = locationDao.save(new LocationRep(null, "24B", 8, "T Nagar", "Chennai", "Chennai", "Tamil Nadu", "India", "600017", 13.0331, 80.2306));
+        LocationRep loc = locationDao.save(new LocationRep(null, "24B", 28, "T Nagar", "Chennai", "Chennai", "Tamil Nadu", "India", "600017", 19.4032, 20.3930));
         var found = locationDao.findById(loc.id());
         assertTrue(found.isPresent());
         assertEquals("T Nagar", found.get().areaname());
@@ -63,8 +63,8 @@ public class LocationDaoTest {
 
     @Test
     void testUpdate() {
-        LocationRep loc = locationDao.save(new LocationRep(null, "10C", 3, "Velachery", "Chennai", "Chennai", "Tamil Nadu", "India", "600042", 12.9611, 80.2180));
-        LocationRep updated = locationDao.save(new LocationRep(loc.id(), "10C", 3, "Velachery", "Chennai", "Chennai", "Tamil Nadu", "India", "600042", 12.9615, 80.2190));
+        LocationRep loc = locationDao.save(new LocationRep(null, "30C", 33, "Velachery", "Chennai", "Chennai", "Tamil Nadu", "India", "600042", 90.2903, 80.2180));
+        LocationRep updated = locationDao.save(new LocationRep(loc.id(), "40C", 43, "Velachery", "Chennai", "Chennai", "Tamil Nadu", "India", "600042", 19.2030, 80.2190));
         assertEquals(loc.id(), updated.id());
         assertEquals(12.9615, updated.latitude());
     }
@@ -72,14 +72,14 @@ public class LocationDaoTest {
     @Test
 
     void testFindAll() {
-        locationDao.save(new LocationRep(null, "5E", 2, "Anna Nagar", "Chennai", "Chennai", "Tamil Nadu", "India", "600040", 13.0987, 80.2100));
+        locationDao.save(new LocationRep(null, "15E", 22, "Anna Nagar", "Chennai", "Chennai", "Tamil Nadu", "India", "600040", 11.0022, 70.2020));
         List<LocationRep> all = locationDao.findAll();
         assertTrue(all.size() >= 1);
     }
 
     @Test
     void testDeleteById() {
-        LocationRep loc = locationDao.save(new LocationRep(null, "6F", 4, "Adyar", "Chennai", "Chennai", "Tamil Nadu", "India", "600020", 13.0067, 80.2544));
+        LocationRep loc = locationDao.save(new LocationRep(null, "16F", 14, "Adyar", "Chennai", "Chennai", "Tamil Nadu", "India", "600020", 19.2902, 20.2544));
         locationDao.deleteById(loc.id());
         assertTrue(locationDao.findById(loc.id()).isEmpty());
     }
