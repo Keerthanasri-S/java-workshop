@@ -1,7 +1,7 @@
-package com.project.dao;
+package com.temperature.dao;
 
-import com.project.dao.OrganizationDao;
-import com.project.model.OrganizationRep;
+import com.temperature.dao.OrganizationDao;
+import com.temperature.model.OrganizationRep;
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.*;
 
@@ -23,14 +23,12 @@ public class OrganizationDaoTest {
 
         try (Connection conn = ds.getConnection(); Statement stmt = conn.createStatement()) {
             stmt.execute("""
-                CREATE TABLE organization (
-                    id INT AUTO_INCREMENT PRIMARY KEY,
+                CREATE TABLE  organization (
+                    org_id INT AUTO_INCREMENT PRIMARY KEY,
                     name VARCHAR(255),
-                    certificateid VARCHAR(255),
-                    type VARCHAR(255),
                     email VARCHAR(255),
                     phone VARCHAR(20),
-                    ceo VARCHAR(255)
+                    website VARCHAR(255)
                 )
             """);
         }
@@ -41,28 +39,28 @@ public class OrganizationDaoTest {
     @Test
 
     void testSave() throws SQLException {
-        OrganizationRep org = new OrganizationRep(null, "Tech Corp", "CERT123", "Private", "contact@techcorp.com", "1234567890", "Alice Smith");
+        OrganizationRep org = new OrganizationRep(null, "Tech Corp", "CERT123@gmail.com", "1234567890", "contact@techcorp.com");
         OrganizationRep saved = organizationDao.save(org);
-        assertNotNull(saved.id());
+        assertNotNull(saved.org_id());
         assertEquals("Tech Corp", saved.name());
     }
 
     @Test
 
     void testUpdate() throws SQLException {
-        OrganizationRep org = organizationDao.save(new OrganizationRep(null, "Edu Inc", "CERT456", "Public", "info@edu.com", "9876543210", "John Doe"));
-        OrganizationRep updated = organizationDao.save(new OrganizationRep(org.id(), "Edu Ltd", "CERT456", "Public", "info@edu.com", "9876543210", "Jane Roe"));
+        OrganizationRep org = organizationDao.save(new OrganizationRep(null, "Edu Inc", "CERT456@gmail.com", "1234567890", "info@edu.com"));
+        OrganizationRep updated = organizationDao.save(new OrganizationRep(org.org_id(), "Edu Ltd", "CERT456@gmail.com", "1234567890", "info@edu.com"));
 
-        assertEquals(org.id(), updated.id());
+        assertEquals(org.org_id(), updated.org_id());
         assertEquals("Edu Ltd", updated.name());
-        assertEquals("Jane Roe", updated.ceo());
+        assertEquals("info@edu.com", updated.website());
     }
 
     @Test
 
     void testFindById() throws SQLException {
-        OrganizationRep org = organizationDao.save(new OrganizationRep(null, "Health Org", "CERT789", "Non-Profit", "contact@health.org", "9999999999", "Dr. Smith"));
-        var result = organizationDao.findById(org.id());
+        OrganizationRep org = organizationDao.save(new OrganizationRep(null, "Health Org", "CERT789@gmail.com", "1234567890", "contact@health.org"));
+        var result = organizationDao.findById(org.org_id());
 
         assertTrue(result.isPresent());
         assertEquals("Health Org", result.get().name());
@@ -71,8 +69,8 @@ public class OrganizationDaoTest {
     @Test
 
     void testFindAll() throws SQLException {
-        organizationDao.save(new OrganizationRep(null, "EnviroTech", "CERT001", "NGO", "enviro@tech.org", "1111111111", "Leo K."));
-        organizationDao.save(new OrganizationRep(null, "Green Future", "CERT002", "NGO", "green@future.org", "2222222222", "Mia G."));
+        organizationDao.save(new OrganizationRep(null, "EnviroTech", "CERT001@gmail.com", "1234567890", "enviro@tech.org"));
+        organizationDao.save(new OrganizationRep(null, "Green Future", "CERT002@gmail.com", "1234567890", "green@future.org"));
         List<OrganizationRep> list = organizationDao.findAll();
 
         assertTrue(list.size() >= 2);
@@ -88,9 +86,9 @@ public class OrganizationDaoTest {
     @Test
 
     void testDeleteById() throws SQLException {
-        OrganizationRep org = organizationDao.save(new OrganizationRep(null, "Temp Org", "CERT003", "Private", "temp@org.com", "3333333333", "Temp CEO"));
-        organizationDao.deleteById(org.id());
-        assertTrue(organizationDao.findById(org.id()).isEmpty());
+        OrganizationRep org = organizationDao.save(new OrganizationRep(null, "Temp Org", "CERT003@gmail.com", "1234567890", "temp@org.com"));
+        organizationDao.deleteById(org.org_id());
+        assertTrue(organizationDao.findById(org.org_id()).isEmpty());
     }
 
     @Test

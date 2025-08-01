@@ -1,92 +1,90 @@
-package com.project.dao;
+package com.temperature.dao;
 
-import com.project.dao.LocationDao;
-import com.project.model.LocationRep;
+import com.temperature.model.LocationRep;
 import org.h2.jdbcx.JdbcDataSource;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
-import java.sql.Statement;
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class LocationDaoTest {
+class LocationDaoTest {
 
-    private static LocationDao locationDao;
+    private LocationDao locationDao;
 
-    @BeforeAll
-    static void setup() throws Exception {
+    @BeforeEach
+    void setUp() throws SQLException {
         JdbcDataSource ds = new JdbcDataSource();
         ds.setURL("jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1");
-        ds.setUser("keerthana");
+        ds.setUser("nexa");
 
-        try (Connection connection = ds.getConnection();
-             Statement stmt = connection.createStatement()) {
+        try (var conn = ds.getConnection();
+             var stmt = conn.createStatement()) {
+
+            stmt.execute("""
+                CREATE TABLE organization (
+                    org_id INT PRIMARY KEY
+                )
+            """);
 
             stmt.execute("""
                 CREATE TABLE location (
-                    id INT AUTO_INCREMENT PRIMARY KEY,
-                    doorno VARCHAR(255),
-                    street INT,
-                    areaname VARCHAR(255),
-                    city VARCHAR(255),
-                    district VARCHAR(255),
-                    state VARCHAR(255),
-                    country VARCHAR(255),
-                    pincode VARCHAR(20),
-                    latitude DOUBLE,
-                    longitude DOUBLE
+                    location_id INT PRIMARY KEY AUTO_INCREMENT,
+                    location_name VARCHAR(255),
+                    address VARCHAR(255),
+                    org_id INT,
+                    FOREIGN KEY (org_id) REFERENCES organization(org_id)
                 )
             """);
+
+            stmt.execute("INSERT INTO organization(org_id) VALUES (101)");
         }
 
         locationDao = new LocationDao(ds);
     }
 
     @Test
-
-    void testSave() {
-        LocationRep loc = locationDao.save(new LocationRep(null, "22A", 25, "Indira Nagar", "Chennai", "Chennai", "Tamil Nadu", "India", "600020", 12.0237, 20.9749));
-        assertNotNull(loc.id());
-        assertEquals("Chennai", loc.city());
+    void testSave() throws SQLException {
+        var saved = LocationDao.save(new LocationRep(null, "Tower A", "Chennai", 101));
+        assertNotNull(saved.location_id());
     }
 
     @Test
-
-    void testFindById() {
-        LocationRep loc = locationDao.save(new LocationRep(null, "24B", 28, "T Nagar", "Chennai", "Chennai", "Tamil Nadu", "India", "600017", 19.4032, 20.3930));
-        var found = locationDao.findById(loc.id());
-        assertTrue(found.isPresent());
-        assertEquals("T Nagar", found.get().areaname());
+    void testFindById() throws SQLException {
+        var saved = LocationDao.save(new LocationRep(null, "Block B", "Bangalore", 101));
+        var result = LocationDao.findById(saved.location_id());
+        assertTrue(result.isPresent());
+        assertEquals("Block B", result.get().location_name());
     }
 
     @Test
-    void testUpdate() {
-        LocationRep loc = locationDao.save(new LocationRep(null, "30C", 33, "Velachery", "Chennai", "Chennai", "Tamil Nadu", "India", "600042", 90.2903, 80.2180));
-        LocationRep updated = locationDao.save(new LocationRep(loc.id(), "40C", 43, "Velachery", "Chennai", "Chennai", "Tamil Nadu", "India", "600042", 19.2030, 80.2190));
-        assertEquals(loc.id(), updated.id());
-        assertEquals(12.9615, updated.latitude());
+    void testFindAll() throws SQLException {
+        LocationDao.save(new LocationRep(null, "Loc1", "Area1", 101));
+        LocationDao.save(new LocationRep(null, "Loc2", "Area2", 101));
+        List<LocationRep> all = LocationDao.findAll();
+        assertEquals(2, all.size());
     }
 
     @Test
-
-    void testFindAll() {
-        locationDao.save(new LocationRep(null, "15E", 22, "Anna Nagar", "Chennai", "Chennai", "Tamil Nadu", "India", "600040", 11.0022, 70.2020));
-        List<LocationRep> all = locationDao.findAll();
-        assertTrue(all.size() >= 1);
+    void testDeleteById() throws SQLException {
+        var saved = LocationDao.save(new LocationRep(null, "ToDelete", "Area", 101));
+        LocationDao.deleteById(saved.location_id());
+        assertTrue(LocationDao.findById(saved.location_id()).isEmpty());
     }
 
     @Test
-    void testDeleteById() {
-        LocationRep loc = locationDao.save(new LocationRep(null, "16F", 14, "Adyar", "Chennai", "Chennai", "Tamil Nadu", "India", "600020", 19.2902, 20.2544));
-        locationDao.deleteById(loc.id());
-        assertTrue(locationDao.findById(loc.id()).isEmpty());
+    void testDeleteAll() throws SQLException {
+        LocationDao.save(new LocationRep(null, "A", "Addr", 101));
+        LocationDao.save(new LocationRep(null, "B", "Addr", 101));
+        LocationDao.deleteAll();
+        assertEquals(0, LocationDao.count());
     }
 
     @Test
-    void testDeleteAll() {
-        locationDao.deleteAll();
-        assertEquals(0, locationDao.findAll().size());
+    void testCount() throws SQLException {
+        LocationDao.save(new LocationRep(null, "One", "Somewhere", 101));
+        assertEquals(1, LocationDao.count());
     }
 }
