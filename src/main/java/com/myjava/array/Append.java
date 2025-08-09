@@ -21,7 +21,12 @@ public class Append {
                 count++;
             }
         }
-
+        for (int i = buildingnumber-count ; i < buildingnumber; i++) {
+            Building[i] = null;
+        }
+        for (int j = 0; j < buildingnumber; j++) {
+            System.out.println(Building[j]);
+        }
 
     }
 }
