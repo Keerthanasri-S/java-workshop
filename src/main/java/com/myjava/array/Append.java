@@ -12,15 +12,16 @@ public class Append {
             Building[i] = sc.next();
         }
         int count = 0;
-
-
-
-        for (int i = buildingnumber-count ; i < buildingnumber; i++) {
-            Building[i] = null;
-        }
-            for (int j = 0; j < buildingnumber; j++) {
-                System.out.println(Building[j]);
+        for (int i = 0, j = 0; i < buildingnumber; i++) {
+            if (!Building[i].equals("c")) {
+                Building[j] = Building[i];
+                j++;
             }
+            if(Building[i].equals("c")){
+                count++;
+            }
+        }
+
 
     }
 }
