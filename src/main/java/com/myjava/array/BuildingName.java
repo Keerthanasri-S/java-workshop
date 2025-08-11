@@ -15,9 +15,5 @@ public class BuildingName {
         }
     }
 
-    public static void main(String[] args) {
-        BuildingName buildingName=new BuildingName();
-        buildingName.build();
 
-    }
 }
