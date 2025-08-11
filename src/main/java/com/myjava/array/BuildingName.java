@@ -14,6 +14,10 @@ public class BuildingName {
             System.out.println(building[i]);
         }
     }
+    public static void main(String[] args) {
+        BuildingName buildingName=new BuildingName();
+        buildingName.build();
 
+    }
 
 }
