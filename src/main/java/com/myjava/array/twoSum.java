@@ -10,6 +10,13 @@ public class twoSum {
         for(int i=0;i<a;i++){
             b[i]=sc.nextInt();
         }
-
+        int c = 8;
+        for(int i =0 ;i< a;i++){
+            for(int j=i+1;j<a;j++){
+                if(b[i]+b[j]==c){
+                    System.out.println("("+ b[i]+"," +b[j]+")");
+                }
+            }
+        }
     }
 }
