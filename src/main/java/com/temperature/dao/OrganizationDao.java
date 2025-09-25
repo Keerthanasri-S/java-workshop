@@ -1,17 +1,24 @@
 package com.temperature.dao;
 
-import com.temperature.model. OrganizationRep;
-
-import javax.sql.DataSource;
-
-import java.sql.*;
+import java.sql. Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.sql.DataSource;
+
+import com.temperature.model.OrganizationRep;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 
+@Component
 public class OrganizationDao {
+    @Autowired
     private final DataSource dataSource;
 
     public OrganizationDao(DataSource dataSource) {
@@ -32,8 +39,7 @@ public class OrganizationDao {
                     try (ResultSet rs = stmt.getGeneratedKeys()) {
                         if (rs.next()) {
                             return new OrganizationRep(
-                                    rs.getInt(1),
-                                    org.name(),
+                                    org.org_id(), org.name(),
                                     org.email(),
                                     org.phone(),
                                     org.website()
@@ -67,12 +73,13 @@ public class OrganizationDao {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return Optional.of(new OrganizationRep(
-                            rs.getInt("org_id"),
-                            rs.getString("name"),
-                            rs.getString("email"),
-                            rs.getString("phone"),
-                            rs.getString("website")
-                    ));
+    rs.getInt("org_id"),
+    rs.getString("name"),
+    rs.getString("email"),
+    rs.getString("phone"),
+    rs.getString("website")
+));
+
                 }
             }
         }
@@ -87,8 +94,8 @@ public class OrganizationDao {
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 list.add(new OrganizationRep(
-                        rs.getInt("id"),
-                        rs.getString("name"),
+                    rs.getInt("org_id"),
+                                                rs.getString("name"),
                         rs.getString("email"),
                         rs.getString("phone"),
                         rs.getString("website")

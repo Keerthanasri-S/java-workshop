@@ -10,5 +10,4 @@ public class TempdataApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TempdataApplication.class, args);
 	}
-
 }
