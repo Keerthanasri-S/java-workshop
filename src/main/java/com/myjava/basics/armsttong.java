@@ -8,6 +8,11 @@ public class armsttong {
         int a = sc.nextInt();
         int t = a;
         int sum = 0;
-
+        while(t!=0){
+            int b = t%10;
+            sum+= b * b* b;
+            t/=10;
+        }
+        System.out.println(sum);
     }
 }
